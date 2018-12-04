@@ -1,0 +1,35 @@
+{
+  "apiVersion": "v1",
+  "kind": "ReplicationController",
+  "metadata": {
+    "generateName": "pomodoro-"
+  },
+  "spec": {
+    "replicas": 1,
+    "selector": {
+      "service_name": "pomodoro"
+    },
+    "template": {
+      "metadata": {
+        "generateName": "pomodoro-pod-",
+        "labels": {
+          "service_name": "pomodoro"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "pomodoro-container",
+            "image": "gcr.io/pomodoro-224423/pomodoro:1",
+            "ports": [
+              {
+                "containerPort": 3000,
+                "protocol": "TCP"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
